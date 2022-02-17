@@ -1,7 +1,31 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Row, Col } from "antd";
+import Api from "../service/api";
 
 function Home() {
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const handleNews = (articles) => {
+    setLoading(false);
+    setNews({
+      world: articles[0]?.value.value,
+      economy: articles[1]?.value.value,
+      technology: articles[2]?.value.value,
+    });
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    Promise.allSettled([
+      Api.getNews("world"),
+      Api.getNews("economy"),
+      Api.getNews("technology"),
+    ]).then(handleNews);
+  }, []);
+
+  if (loading) return <div>Carregando</div>;
+
   return (
     <div>
       <Row gutter={[16, 16]}>
