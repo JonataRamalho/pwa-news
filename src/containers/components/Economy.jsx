@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
+import { createMarkup } from "../../utils";
 
 const Economy = ({ values }) => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Economy = ({ values }) => {
     navigate(`/economy/${id}`);
   };
 
-  const renderPost = () => {
+  const renderPost = (post, index) => {
     const { title, image, description, id } = post;
 
     return (
@@ -38,4 +39,12 @@ const Economy = ({ values }) => {
   return <Row gutter={[16, 16]}>{values?.map(renderPost)}</Row>;
 };
 
-export default Economy;
+Economy.defaultProps = {
+  values: [],
+};
+
+Economy.prototype = {
+  values: PropTypes.array.isRequired,
+};
+
+export default memo(Economy);
