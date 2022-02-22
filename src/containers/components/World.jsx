@@ -21,17 +21,19 @@ const World = ({ values }) => {
 
   const renderPost = (post, index) => {
     const { title, image, description, id } = post;
+    const isFirst = index === 0;
+    const spanValue = isFirst ? 24 : 12;
 
     console.log(image.url);
 
     return (
-      <Col span={12} md={6} key={`World-${index}`}>
+      <Col span={spanValue} md={6} key={`World-${index}`}>
         <article onClick={() => openPost(id)}>
           <p>
             <strong dangerouslySetInnerHTML={createMarkup(title)} />
           </p>
           <p dangerouslySetInnerHTML={createMarkup(description)} />
-          {image.url && renderImg({ image, description })}
+          {isFirst && renderImg({ image, description })}
         </article>
       </Col>
     );
