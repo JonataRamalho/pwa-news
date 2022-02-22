@@ -16,7 +16,7 @@ const World = ({ values }) => {
   };
 
   const openPost = (id) => {
-    navigate(`/World/${id}`);
+    navigate(`/world/${id}`);
   };
 
   const renderPost = (post, index) => {
