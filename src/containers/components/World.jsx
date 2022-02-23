@@ -24,7 +24,7 @@ const World = ({ values }) => {
     const isFirst = index === 0;
     const spanValue = isFirst ? 24 : 12;
 
-    console.log(image.url);
+    // console.log(image.url);
 
     return (
       <Col span={spanValue} md={6} key={`World-${index}`}>
